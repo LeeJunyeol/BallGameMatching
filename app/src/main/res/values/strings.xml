@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SportFacilitiesReservationApplication</string>
+    <string name="ic_tb_list">네이게이션 드로워 보기</string>
+    <string name="ic_tb_search">체육시설 검색</string>
+    <string name="title_activity_drawer">activity_drawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
