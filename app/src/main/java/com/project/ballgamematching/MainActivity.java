@@ -14,17 +14,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+
+import java.io.Serializable;
+
+
+public class MainActivity extends AppCompatActivity implements Serializable,
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
     private Intent intent;
+    private GoogleSignInAccount acct;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        intent = getIntent();
+        acct = (GoogleSignInAccount) intent.getExtras().get("acct");
+
+
+
+
 
         // activity_main에 있는 툴바를 액션바로 이용
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_common);
@@ -95,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+
+
     /**
      * Called when an item in the navigation menu is selected.
      *
@@ -110,9 +132,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(this, SettingLayoutActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_signOut){
+            intent = new Intent(this, SignOutActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
+
+
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+
 }
