@@ -24,7 +24,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
+        app:layout_constraintVertical_bias="0.963" >
+
+    </com.google.android.gms.common.SignInButton>
 
     <ImageView
         android:id="@+id/imageView"
@@ -43,5 +45,6 @@
         tools:layout_editor_absoluteY="99dp"
         tools:layout_editor_absoluteX="33dp"
         android:background="@drawable/logoimg"/>
+
 
 </android.support.constraint.ConstraintLayout>

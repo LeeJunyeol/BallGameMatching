@@ -1,6 +1,9 @@
 package com.project.ballgamematching;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -15,17 +18,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.SignInAccount;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.plus.Plus;
 
 import java.io.Serializable;
 
 
-public class MainActivity extends AppCompatActivity implements Serializable,
+public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private ActionBarDrawerToggle toggle;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements Serializable,
 
         intent = getIntent();
         acct = (GoogleSignInAccount) intent.getExtras().get("acct");
-
 
 
 
@@ -131,11 +129,14 @@ public class MainActivity extends AppCompatActivity implements Serializable,
         if (id == R.id.nav_setting) {
             intent = new Intent(this, SettingLayoutActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_signOut){
-            intent = new Intent(this, SignOutActivity.class);
+
+        }else if (id == R.id.nav_signOut){
+
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            intent.putExtra("signCheck", true);
             startActivity(intent);
             finish();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -150,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements Serializable,
     public void onClick(View v) {
 
     }
+
 
 
 }

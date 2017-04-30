@@ -20,21 +20,22 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 
-
 /**
  * Created by JUO on 2017. 4. 26..
  */
 
 public class WelcomeActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
-
-    public GoogleApiClient mGoogleApiClient;
+        GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private static final String TAG = "WelcomeActivity";
+
     private static final int RC_SIGN_IN = 9001;
+    public GoogleApiClient mGoogleApiClient;
+
 
     private SignInButton sign_in_btn;
     Intent intent;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,46 +43,37 @@ public class WelcomeActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_welcome);
 
 
+        // btn listener
+        findViewById(R.id.btn_welcome).setOnClickListener(this);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
-
-            // btn listener
-            findViewById(R.id.btn_welcome).setOnClickListener(this);
-//        findViewById(R.id.sign_out_button).setOnClickListener(this);
-
-
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .build();
-
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this, this)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                    .build();
-
-
-            sign_in_btn = (SignInButton) findViewById(R.id.btn_welcome);
-            sign_in_btn.setSize(SignInButton.SIZE_STANDARD);
-            sign_in_btn.setScopes(gso.getScopeArray());
-
-
+        sign_in_btn = (SignInButton) findViewById(R.id.btn_welcome);
+        sign_in_btn.setSize(SignInButton.SIZE_STANDARD);
+        sign_in_btn.setScopes(gso.getScopeArray());
 
 
     }
 
+
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
 
 
-
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if(opr.isDone()){
+        if (opr.isDone()) {
             Log.d(TAG, "Got cached sign-in");
             GoogleSignInResult result = opr.get();
-            handleSignInResult (result);
-        }else {
+            handleSignInResult(result);
+        } else {
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
@@ -95,58 +87,83 @@ public class WelcomeActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
             handleSignInResult(result);
+
+
         }
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+
+        Intent signCheck = getIntent();
 
 
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
 
-            // signed 성공, authenticated UI 보여주기
-            GoogleSignInAccount acct = result.getSignInAccount();
-            intent = new Intent(this, MainActivity.class);
-            intent.putExtra("acct", acct);
+            if (null != signCheck.getExtras()) {
+                getIntent().removeExtra("signCheck");
+                signOut();
+            } else {
 
-            startActivity(intent);
-            finish();
+                Log.d(TAG, "aaaaaaaa:" + result.getStatus());
+                // signed 성공
+                GoogleSignInAccount acct = result.getSignInAccount();
 
-        }else {
+                intent = new Intent(this, MainActivity.class);
+                intent.putExtra("acct", acct);
+
+
+                startActivity(intent);
+            }
+
+        } else {
         }
     }
 
 
-    private void signIn(){
+    private void signIn() {
         Intent singInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(singInIntent, RC_SIGN_IN);
     }
 
 
-    public void signOut(){
+    public void signOut() {
 
+        mGoogleApiClient.connect();
+        mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+            @Override
+            public void onConnected(Bundle bundle) {
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status status) {
+                            }
+                        });
+            }
 
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        Intent relode = new Intent(WelcomeActivity.this, WelcomeActivity.class);
-                        startActivity(relode);
-                        finish();
-                    }
+            @Override
+            public void onConnectionSuspended(int i) {
 
+            }
+        });
 
-                });
 
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_welcome:
+                signIn();
+                break;
 
+        }
 
-
+    }
 
 
     @Override
@@ -154,15 +171,5 @@ public class WelcomeActivity extends AppCompatActivity implements
         Log.d(TAG, "onConnectionFailed: " + connectionResult);
     }
 
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_welcome:
-                signIn();
-                break;
-        }
-    }
 
 }
