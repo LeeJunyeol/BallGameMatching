@@ -55,6 +55,8 @@ public class WelcomeActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        mGoogleApiClient.connect();
+
         sign_in_btn = (SignInButton) findViewById(R.id.btn_welcome);
         sign_in_btn.setSize(SignInButton.SIZE_STANDARD);
         sign_in_btn.setScopes(gso.getScopeArray());
