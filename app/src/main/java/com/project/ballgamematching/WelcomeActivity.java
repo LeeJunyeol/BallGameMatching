@@ -132,7 +132,6 @@ public class WelcomeActivity extends AppCompatActivity implements
 
     public void signOut() {
 
-        mGoogleApiClient.connect();
         mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
             @Override
             public void onConnected(Bundle bundle) {
