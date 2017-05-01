@@ -91,7 +91,7 @@
             android:id="@+id/txttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="[시간선택]" />
+            android:text="[시간선택1]" />
 
     </LinearLayout>
     <View
