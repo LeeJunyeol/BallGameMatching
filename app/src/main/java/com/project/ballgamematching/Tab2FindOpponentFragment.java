@@ -2,6 +2,7 @@ package com.project.ballgamematching;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
@@ -14,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,16 +32,30 @@ public class Tab2FindOpponentFragment extends Fragment implements View.OnClickLi
     View view;
     ArrayAdapter<CharSequence> scspin;
     boolean sInitSpinner;
-
+    Button btn_out;
+    RadioGroup ssts;
 
 //선언----------------------------------------------
 
-
+//타켓API로 빌드(GregorianCalendar()원래minSDK 24로 맞춰야함)
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tab2_find_opponent, container, false);
+//라디오버튼-----------------------------------------------------------------------------------------
+        ssts = (RadioGroup)view.findViewById(R.id.searchsports);
+        btn_out =(Button) view.findViewById(R.id.searchmat);
+        btn_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioButton sports= (RadioButton) view.findViewById(ssts.getCheckedRadioButtonId());
+                String str_sptype = sports.getText().toString();
+                ListView matchinglv = (ListView)view.findViewById(R.id.sclistview);
+//                matchinglv.setRemoteViewsAdapter(Intent.parseIntent());
+                Toast.makeText(view.getContext(), str_sptype+"선택",Toast.LENGTH_SHORT).show();
+            }
+        });
 //캘린더----------------------------------------------------------------------
         sTxtdate = (TextView) view.findViewById(R.id.txtdate);
 
