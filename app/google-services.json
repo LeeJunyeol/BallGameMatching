@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "268194415397",
+    "firebase_url": "https://bgmproject-41ca7.firebaseio.com",
+    "project_id": "bgmproject-41ca7",
+    "storage_bucket": "bgmproject-41ca7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268194415397:android:8cac6060be1dd3b9",
+        "android_client_info": {
+          "package_name": "com.project.ballgamematching"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268194415397-amq8iukqgfbrkspj9oe46487ahjptvhm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.ballgamematching",
+            "certificate_hash": "35a329f07fedd79e3d91b44ed06af8e12c91e69b"
+          }
+        },
+        {
+          "client_id": "268194415397-k8u604nn2t7nu09aus9fvva5em02mgel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjgDxbZgWJ5bQy7uh5xausynodWvqT7uk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268194415397-k8u604nn2t7nu09aus9fvva5em02mgel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

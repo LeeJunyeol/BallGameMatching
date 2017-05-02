@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background2">
 
-
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_welcome"
         android:layout_width="0dp"
