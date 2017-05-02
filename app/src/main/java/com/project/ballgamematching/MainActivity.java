@@ -1,9 +1,7 @@
 package com.project.ballgamematching;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -14,14 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-
-import java.io.Serializable;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -38,8 +33,10 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        intent = getIntent();
+//        intent = getIntent();
+/*
         acct = (GoogleSignInAccount) intent.getExtras().get("acct");
+*/
 
 
 
