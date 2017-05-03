@@ -30,6 +30,7 @@
     </RadioGroup>
 
     <RadioGroup
+        android:id="@+id/searchversus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -127,78 +128,13 @@
         android:layout_marginTop="15px"
         android:background="#FF0000"></View>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/sclistview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/searchimagev"
-                android:layout_width="80dip"
-                android:layout_height="80dip"
-                android:layout_margin="10dip"
-                android:src="@drawable/hired" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dip"
-
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/seda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="8dip"
-                    android:layout_marginTop="5dip"
-                    android:text="sub"
-                    android:textSize="16dip" />
-
-                <TextView
-                    android:id="@+id/sewa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="8dip"
-                    android:layout_marginTop="5dip"
-                    android:text="sub"
-                    android:textSize="16dip" />
-
-                <TextView
-                    android:id="@+id/seid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="8dip"
-                    android:layout_marginTop="5dip"
-                    android:text="sub"
-                    android:textSize="16dip" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               >
-
-                <TextView
-                    android:id="@+id/setehi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="title"
-                    android:textSize="24dip" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="match_parent"></ListView>
+    </RelativeLayout>
 </LinearLayout>
+

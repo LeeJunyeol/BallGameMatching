@@ -2,7 +2,6 @@ package com.project.ballgamematching;
 
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.os.Build;
@@ -27,33 +26,51 @@ import android.widget.Toast;
  */
 
 public class Tab2FindOpponentFragment extends Fragment implements View.OnClickListener {
+    static final String[] LIST_MENU = {"List1", "List2", "List3"};
     int sYear, sMonth, sDay;
     TextView sTxtdate;
     View view;
     ArrayAdapter<CharSequence> scspin;
+
     boolean sInitSpinner;
+    //찾기 버튼
     Button btn_out;
+    //축구 농구 라디오그룹 (버튼)
     RadioGroup ssts;
+    //팀, 용병, 원해요 라디오 그룹 (버튼)
+    RadioGroup ssvs;
+
 
 //선언----------------------------------------------
 
-//타켓API로 빌드(GregorianCalendar()원래minSDK 24로 맞춰야함)
+    //타켓API로 빌드(GregorianCalendar()원래minSDK 24로 맞춰야함)
     @TargetApi(Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tab2_find_opponent, container, false);
 //라디오버튼-----------------------------------------------------------------------------------------
-        ssts = (RadioGroup)view.findViewById(R.id.searchsports);
-        btn_out =(Button) view.findViewById(R.id.searchmat);
+        ssts = (RadioGroup) view.findViewById(R.id.searchsports);
+        ssvs = (RadioGroup) view.findViewById(R.id.searchversus);
+        btn_out = (Button) view.findViewById(R.id.searchmat);
         btn_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RadioButton sports= (RadioButton) view.findViewById(ssts.getCheckedRadioButtonId());
+                //축구 농구 라디오그룹 (버튼)
+                RadioButton sports = (RadioButton) view.findViewById(ssts.getCheckedRadioButtonId());
+                //팀, 용병, 원해요 라디오 그룹 (버튼)
+                RadioButton versus = (RadioButton) view.findViewById(ssvs.getCheckedRadioButtonId());
+                //축구 농구 라디오그룹 (버튼)
                 String str_sptype = sports.getText().toString();
-                ListView matchinglv = (ListView)view.findViewById(R.id.sclistview);
+                //팀, 용병, 원해요 라디오 그룹 (버튼)
+                String str_vstype = versus.getText().toString();
+
+//                ListView matchinglv = (ListView) view.findViewById(R.id.sclistview);
 //                matchinglv.setRemoteViewsAdapter(Intent.parseIntent());
-                Toast.makeText(view.getContext(), str_sptype+"선택",Toast.LENGTH_SHORT).show();
+                //축구 농구 라디오그룹 (버튼)
+                Toast.makeText(view.getContext(), str_sptype + "선택", Toast.LENGTH_SHORT).show();
+                //팀, 용병, 원해요 라디오 그룹 (버튼)
+                Toast.makeText(view.getContext(), str_vstype + "선택", Toast.LENGTH_SHORT).show();
             }
         });
 //캘린더----------------------------------------------------------------------
@@ -94,10 +111,24 @@ public class Tab2FindOpponentFragment extends Fragment implements View.OnClickLi
                                        }
         );
 //스피너 끝---------------------------------------------------------------------------------------------------------------
+// 리스트뷰 -----------------------------------------------------------------------------------------------
+        ArrayAdapter Adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU);
+        ListView listView = (ListView) view.findViewById(R.id.sclistview);
+        listView.setAdapter(Adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // get TextView's text
+                String strText = (String) parent.getItemAtPosition(position);
+
+            }
+        });
+
 
         return view;
     }
-//캘린더 시작---------------------------------------------------------------------------------------------------------------
+
+    //캘린더 시작---------------------------------------------------------------------------------------------------------------
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.searchdate:
