@@ -1,5 +1,6 @@
 package com.project.ballgamematching;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,10 +14,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.project.ballgamematching.asynctasks.GetResAllJsonAsyncTask;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -38,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements
         acct = (GoogleSignInAccount) intent.getExtras().get("acct");
 */
 
-
-
+        new GetResAllJsonAsyncTask().execute(this);
 
         // activity_main에 있는 툴바를 액션바로 이용
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_common);

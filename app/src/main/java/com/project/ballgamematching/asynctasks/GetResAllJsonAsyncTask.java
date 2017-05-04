@@ -24,16 +24,12 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by jylee on 2017-05-05.
  */
 
-public class ServletPostAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class GetResAllJsonAsyncTask extends AsyncTask<Context, Void, String> {
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
-
-
-
-        context = params[0].first;
-        String name = params[0].second;
+    protected String doInBackground(Context... params) {
+        context = params[0];
 
         try {
             // Set up the request
